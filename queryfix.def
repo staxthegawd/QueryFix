@@ -1,0 +1,5 @@
+LIBRARY "queryfix"
+EXPORTS
+    Meta_Attach
+    Meta_Detach
+    Meta_Query
