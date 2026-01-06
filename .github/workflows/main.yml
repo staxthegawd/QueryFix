@@ -1,0 +1,19 @@
+name: Build QueryFix DLL
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+      - name: Compile
+        run: |
+          cl.exe /LD /I "path/to/hlsdk/common" /I "path/to/hlsdk/engine" /I "path/to/hlsdk/dlls" /I "path/to/metamod" /I "path/to/rehlds" main.cpp /Fe:QueryFix.dll winmm.lib /link /DEF:queryfix.def
+      - name: Upload Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: QueryFix-DLL
+          path: QueryFix.dll
